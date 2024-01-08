@@ -1,4 +1,5 @@
 Nuclear Fission Temperature Controller
+
 A nuclear fission temperature controller system regulates the heat generated within
 a nuclear reactor during the fission process. It utilizes temperature sensors to monitor reactor
 temperatures and employs control mechanisms, like coolant flow regulation or control rods, to
