@@ -157,7 +157,7 @@ class FissionTemperatureMonitor {
 }
 
 // Test class
-public class FissionTemperatureMonitorMain {
+public class FissionTemperatureMonitorTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         FissionTemperatureMonitor monitor = new FissionTemperatureMonitor();
