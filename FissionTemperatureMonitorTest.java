@@ -61,14 +61,22 @@ class FissionTemperatureMonitor {
     // Function to check the temperature of the system
     public void checkTemperature() {
         assert validTemp(receivedTemp) : "Received temperature should not be null";
-
-        if (150.0 > receivedTemp.getValue() && receivedTemp.getValue() > 70.0) {
-            insertRod();
-        } else if (receivedTemp.getValue() < 50.0) {
+        
+        if (receivedTemp.getValue() < 50.0){
             withdrawRod();
-        } else {
-            optimalRods();
         }
+        else if (receivedTemp.getValue() >= 50.0&& receivedTemp.getValue() <=  70.0) {
+            optimalRods();
+        } 
+
+        else if (150.0 > receivedTemp.getValue() && receivedTemp.getValue() > 70.0) {
+            insertRod();
+        } 
+        
+        else if (receivedTemp.getValue() >= 150.0) {
+            optimalRods();
+        } 
+        
     }
 
     // Function to insert rods
@@ -87,17 +95,15 @@ class FissionTemperatureMonitor {
 
     // Function for optimal rod status
     private void optimalRods() {
-        if (rodStatus == RodSignal.NOCHANGE) {
-            // Your logic for optimal rod status here
-            // For now, it remains NOCHANGE
-        }
+        
+        rodStatus = RodSignal.NOCHANGE;
     }
 
     // Function for emergency control
     public void emergencyControl() {
         assert validTemp(receivedTemp) : "Received temperature should not be null";
 
-        if (receivedTemp.getValue() > 150.0) {
+        if (receivedTemp.getValue() >= 150.0) {
             ringAlarm();
             activateCoolant();
         } else {
@@ -149,6 +155,7 @@ class FissionTemperatureMonitor {
         return rodStatus;
     }
 }
+
 // Test class
 public class FissionTemperatureMonitorTest {
     public static void main(String[] args) {
@@ -201,7 +208,7 @@ public class FissionTemperatureMonitorTest {
             // Check temperature and perform emergency control
             monitor.checkTemperature();
             monitor.emergencyControl();
-            System.out.println("Temperature checked.");
+            System.out.println("Temperature checked. ");
         } catch (java.util.InputMismatchException e) {
             System.out.println("Invalid input for temperature. Please enter a valid number.");
             scanner.nextLine();  // Consume the invalid input
